@@ -2,10 +2,10 @@ from typing import Any, TypeVar
 
 from unihttp.http import UploadFile
 from unihttp.serialize import RequestDumper, ResponseLoader
-from unihttp.serializers.adaptix import (
+from unihttp.serializers.adaptix.fixed_tp_tags_unwrapping import (
     fixed_type_hint_tags_unwrapping_provider,
-    method_provider,
 )
+from unihttp.serializers.adaptix.provider import method_provider
 
 from adaptix import Retort, dumper, name_mapping
 
