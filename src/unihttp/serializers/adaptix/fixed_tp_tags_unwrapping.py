@@ -1,15 +1,18 @@
-from typing import Any
+from typing import Any, override
 
 from adaptix import Loader, Mediator, Provider
 from adaptix._internal.morphing.generic_provider import TypeHintTagsUnwrappingProvider
 from adaptix._internal.morphing.request_cls import LoaderRequest
 from adaptix._internal.provider.location import TypeHintLoc
-from typing_extensions import override
 
 
 class _FixedTypeHintTagsUnwrappingProvider(TypeHintTagsUnwrappingProvider):
     @override
-    def _provide_proxy(self, mediator: Mediator[Any], request: LoaderRequest) -> Loader[Any]:
+    def _provide_proxy(
+            self,
+            mediator: Mediator[Any],
+            request: LoaderRequest,
+    ) -> Loader[Any]:
         return mediator.mandatory_provide(
             request.with_loc_stack(
                 request.loc_stack.append_with(

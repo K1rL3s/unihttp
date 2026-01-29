@@ -115,11 +115,13 @@ class ForMarkerLocStackChecker(LocStackChecker):
             loc_stack: LocStack[OutputFieldLoc],
     ) -> bool:
         try:
-            owner_loc, field_loc = find_owner_with_field(loc_stack)
+            _, field_loc = find_owner_with_field(loc_stack)
         except ValueError:
             return False
 
-        return self._check_field_loc(field_loc) and self.loc_stack_checker.check_loc_stack(mediator, loc_stack)
+        return self._check_field_loc(
+            field_loc
+        ) and self.loc_stack_checker.check_loc_stack(mediator, loc_stack)
 
     def _check_field_loc(self, loc: FieldLoc) -> bool:
         try:
@@ -141,6 +143,8 @@ def for_marker(
         subclass: bool = False,
 ) -> LocStackChecker:
     """
+    for_marker predicate for adaptix recipe.
+
     Usage:
         # Dump all `Query` values `None` to `"null"`
         dumper(
@@ -158,7 +162,7 @@ def for_marker(
         loader(
             for_marker(Body, P[datetime]),
             lambda x: datetime.fromtimestamp(x / 1000),
-        )
+        ).
     """
     if predicate is None:
         loc_stack_checker = P.ANY
