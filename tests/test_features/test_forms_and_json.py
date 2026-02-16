@@ -53,7 +53,7 @@ async def test_httpx_json_body_custom_dumps(mock_request_dumper, mock_response_l
     assert call_kwargs["data"] == {}
 
     # Verify custom loader used
-    custom_loads.assert_called_once_with('{"ok": true}')
+    custom_loads.assert_called_once_with(b'{"ok": true}')
 
 @pytest.mark.asyncio
 async def test_httpx_form_data(mock_request_dumper, mock_response_loader, mock_client, mock_response):

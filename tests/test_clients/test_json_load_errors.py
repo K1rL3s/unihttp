@@ -37,7 +37,7 @@ def test_httpx_sync_json_error(mock_request, mock_request_dumper, mock_response_
     
     client = HTTPXSyncClient("http://base", mock_request_dumper, mock_response_loader, session=mock_session)
     response = client.make_request(mock_request)
-    assert response.data == "not json"
+    assert response.data == b"not json"
 
 @pytest.mark.asyncio
 async def test_httpx_async_json_error(mock_request, mock_request_dumper, mock_response_loader):
@@ -52,7 +52,7 @@ async def test_httpx_async_json_error(mock_request, mock_request_dumper, mock_re
     
     client = HTTPXAsyncClient("http://base", mock_request_dumper, mock_response_loader, session=mock_session)
     response = await client.make_request(mock_request)
-    assert response.data == "not json"
+    assert response.data == b"not json"
 
 @pytest.mark.asyncio
 async def test_aiohttp_json_error(mock_request, mock_request_dumper, mock_response_loader):
