@@ -90,9 +90,9 @@ class HTTPXSyncClient(BaseSyncClient):
         response_data: Any = None
         if response.content:
             try:
-                response_data = self.json_loads(response.text)
+                response_data = self.json_loads(response.content)
             except (ValueError, TypeError):
-                response_data = response.text
+                response_data = response.content
 
         return HTTPResponse(
             status_code=response.status_code,
@@ -180,9 +180,9 @@ class HTTPXAsyncClient(BaseAsyncClient):
         response_data: Any = None
         if response.content:
             try:
-                response_data = self.json_loads(response.text)
+                response_data = self.json_loads(response.content)
             except (ValueError, TypeError):
-                response_data = response.text
+                response_data = response.content
 
         return HTTPResponse(
             status_code=response.status_code,
